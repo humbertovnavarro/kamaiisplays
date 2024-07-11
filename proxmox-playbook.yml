@@ -1,0 +1,26 @@
+- name: Nice Packages
+  hosts: proxmox
+  remote_user: root
+  tasks:
+    - name: Install btop
+      ansible.builtin.package:
+        name: btop
+        state: present
+    - name: Install tmux
+      ansible.builtin.package:
+        name: tmux
+        state: present
+    - name: Remove pve-enterprise source
+      file: path=/etc/apt/sources.list.d/pve-enterprise.list state=absent
+    - name: Remove ceph enterprise source
+      file: path=/etc/apt/sources.list.d/ceph.list state=absent
+    - name: Enable no sub
+      ansible.builtin.copy:
+        src: ./sources.list
+        dest: /etc/apt/sources.list
+    - name: Update all host/vm packages
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+        name: "*"
+        state: latest
