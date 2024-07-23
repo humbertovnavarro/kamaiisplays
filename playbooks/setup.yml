@@ -1,0 +1,35 @@
+- name: Proxmox Setup
+  hosts: proxmox
+  remote_user: root
+  tasks:
+    - name: Add ssh keys to hosts
+      delegate_to: 127.0.0.1
+      command: 'sshpass -f ../ssh-password.txt ssh-copy-id root@{{ inventory_hostname }}'
+    - name: Remove pve-enterprise source
+      file: path=/etc/apt/sources.list.d/pve-enterprise.list state=absent
+    - name: Remove ceph enterprise source
+      file: path=/etc/apt/sources.list.d/ceph.list state=absent
+    - name: Enable no sub
+      ansible.builtin.copy:
+        src: ../resources/sources.list
+        dest: /etc/apt/sources.list
+    - name: Update all host/vm packages
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+        name: "*"
+        state: latest
+    - name: Install tmux
+      ansible.builtin.package:
+        name: tmux
+        state: present
+    - name: disable high availability
+      service:
+        name: pve-ha-crm
+        enabled: no
+        state: stopped
+    - name: Disable pve-firewall
+      service:
+        name: pve-firewall
+        enabled: no
+        state: stopped

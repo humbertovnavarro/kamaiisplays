@@ -1,0 +1,10 @@
+proxmox:
+  hosts:
+    192.168.10.10:
+    192.168.10.11:
+    192.168.10.12:
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: root
+    ansible_ssh_pass: kamaii

@@ -1,0 +1,19 @@
+- name: Additional tuning for homelabbing
+  hosts: proxmox
+  remote_user: root
+  tasks:
+    - name: Disable pve-firewall
+      service:
+        name: pve-firewall
+        enabled: no
+        state: stopped
+    - name: Disable pve-firewall
+      service:
+        name: pvefw-logger
+        enabled: no
+        state: stopped
+    - name: Disable postfix
+      service:
+        name: postfix
+        enabled: no
+        state: stopped
