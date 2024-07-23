@@ -23,8 +23,3 @@
       ansible.builtin.package:
         name: tmux
         state: present
-    - name: disable high availability
-      service:
-        name: pve-ha-crm
-        enabled: no
-        state: stopped
