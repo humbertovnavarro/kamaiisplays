@@ -1,3 +1,10 @@
+# Setup project environment
+Dependencies:
+Python and PIP
+Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
+Generate an ssh key
+`ssh-keygen -t ed25519`
+
 # Getting started
 - Create a file called ssh-password.txt
 - Rename example.inventory.yml to inventory.yml
