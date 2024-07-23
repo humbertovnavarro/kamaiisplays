@@ -17,3 +17,13 @@
         name: postfix
         enabled: no
         state: stopped
+    - name: Disable high availability resource manager
+      service:
+        name: pve-ha-crm
+        enabled: no
+        state: stopped
+    - name: Disable high availability resource manager
+      service:
+        name: pve-ha-lrm
+        enabled: no
+        state: stopped
