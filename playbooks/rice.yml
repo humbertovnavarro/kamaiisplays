@@ -1,0 +1,42 @@
+- name: Kamaii's Rice
+  hosts: proxmox
+  remote_user: root
+  tasks:
+    - name: tmux
+      ansible.builtin.package:
+        name: tmux
+        state: present
+    - name: zsh
+      ansible.builtin.package:
+        name: zsh
+        state: present
+    - name: rsync
+      ansible.builtin.package:
+        name: rsync
+        state: present
+    - name: git
+      ansible.builtin.package:
+        name: git
+        state: present
+    - name: neovim
+      ansible.builtin.package:
+        name: neovim
+        state: present
+    - name: btop
+      ansible.builtin.package:
+        name: btop
+        state: present
+    - name: ohmyzsh
+      shell: 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+      args:
+        creates: /root/.oh-my-zsh
+    - name: chsh
+      shell: 'chsh -s /usr/bin/zsh'
+    - name: clone repo
+      shell: 'git clone --depth 1 https://github.com/AstroNvim/template /root/.config/nvim && rm -rf /root/.config/nvim/.git'
+      args:
+        creates: /root/.config/nvim/README.md
+    - name: motd
+      copy:
+        src: ../resources/motd
+        dest: /etc/motd

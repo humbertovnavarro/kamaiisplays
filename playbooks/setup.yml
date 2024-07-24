@@ -3,6 +3,11 @@
   hosts: proxmox
   remote_user: root
   tasks:
+    - name: sshpass
+      delegate_to: 127.0.0.1
+      ansible.builtin.package:
+        name: sshpass
+        state: present
     - name: Add ssh keys to hosts
       delegate_to: 127.0.0.1
       command: 'sshpass -f ../ssh-password.txt ssh-copy-id root@{{ inventory_hostname }}'
