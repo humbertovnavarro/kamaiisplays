@@ -1,6 +1,7 @@
 # Setup project environment
 Dependencies:
 Python and PIP
+sshpass
 Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
 Generate an ssh key
 `ssh-keygen -t ed25519`

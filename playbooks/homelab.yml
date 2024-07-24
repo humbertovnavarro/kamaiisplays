@@ -1,4 +1,5 @@
 - name: Additional tuning for homelabbing
+  gather_facts: no
   hosts: proxmox
   remote_user: root
   tasks:

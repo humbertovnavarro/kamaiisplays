@@ -1,4 +1,5 @@
 - name: Proxmox Setup
+  gather_facts: no
   hosts: proxmox
   remote_user: root
   tasks:
@@ -19,7 +20,7 @@
         cache_valid_time: 3600
         name: "*"
         state: latest
-    - name: Install tmux
-      ansible.builtin.package:
-        name: tmux
-        state: present
+    - name: Update resolvconf if exists (will fail if resolv.conf does not exist in resources. Safe to ignore errors.)
+      ansible.builtin.copy:
+        src: ../resources/resolv.conf
+        dest: /etc/resolv.conf
