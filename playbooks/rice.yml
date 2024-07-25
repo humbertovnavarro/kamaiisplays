@@ -40,3 +40,7 @@
       copy:
         src: ../resources/motd
         dest: /etc/motd
+    - name: dnsmasq
+      ansible.builtin.package:
+        name: dnsmasq
+        state: present

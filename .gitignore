@@ -1,3 +1,4 @@
 inventory.yml
 ssh-password.txt
 resources/resolv.conf
+.vscode

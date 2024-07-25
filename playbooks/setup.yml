@@ -1,5 +1,4 @@
 - name: Proxmox Setup
-  gather_facts: no
   hosts: proxmox
   remote_user: root
   tasks:

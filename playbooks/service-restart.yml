@@ -1,0 +1,13 @@
+---
+- name: Mass restart
+  hosts: proxmox
+  remote_user: root
+  vars_prompt:
+  - name: service 
+    prompt: Enter service name
+    private: false
+  tasks:
+    - name: Restart Service
+      service:
+        name: "{{ service }}"
+        state: restarted
